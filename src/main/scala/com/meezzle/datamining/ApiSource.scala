@@ -4,9 +4,9 @@ import com.meezzle.datamining.records.ApiRecord
 import com.typesafe.config.Config
 
 case class ApiSourceConfig(url: String,
-                           apiKey: Option[String],
-                           version: Option[Int],
-                           kvPair: Option[Map[String,String]])
+                           apiKey: Option[String] = None,
+                           version: Option[Int] = None,
+                           kvPair: Option[Map[String,String]] = None)
 
 trait ApiSourceBuilder {
   def build(config: Config): ApiSourceConfig
