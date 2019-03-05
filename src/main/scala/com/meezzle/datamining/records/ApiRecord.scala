@@ -1,5 +1,3 @@
 package com.meezzle.datamining.records
 
-trait ApiRecord {
-
-}
+trait ApiRecord extends Product
