@@ -1,4 +1,4 @@
-package com.meezzle.datamining
+package com.meezzle.datamining.api.sources
 
 import com.meezzle.datamining.records.ApiRecord
 import com.typesafe.config.Config
@@ -15,7 +15,6 @@ trait ApiSourceBuilder {
 abstract class ApiSource[T <: ApiRecord](config: Config,
                                          source: Option[ApiSourceBuilder]){
 
-  def get(url: String): T
-  def getList(url: String): Seq[T]
+  def get: T
 
 }
