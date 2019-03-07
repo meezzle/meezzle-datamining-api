@@ -18,14 +18,12 @@ trait ApiSourceBuilder {
 abstract class ApiSource[T <: ApiRecord](config: Config,
                                          source: Option[ApiSourceBuilder]){
 
-  protected lazy val sourceConfig = getApiSourceConfig
-  protected lazy val httpGet = HttpRequest(
-    method = HttpMethods.GET,
-    uri = sourceConfig.url
-  )
+  lazy val sourceConfig = getApiSourceConfig
 
   protected def getApiSourceConfig: ApiSourceConfig
+  protected def getHttpVerb(verb: HttpMethod): HttpRequest = ???
 
-  def get: Future[T]
+
+  def get(suffix: String): Future[T]
 
 }
