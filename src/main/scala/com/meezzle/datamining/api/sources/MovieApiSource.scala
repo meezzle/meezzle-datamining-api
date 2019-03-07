@@ -1,15 +1,20 @@
 package com.meezzle.datamining.api.sources
 
-import com.meezzle.datamining.{ApiSource, ApiSourceBuilder, ApiSourceConfig}
-import com.meezzle.datamining.records.{ApiRecord, MovieDetailRecord}
+import com.meezzle.datamining.records.MovieDetailRecord
 import com.typesafe.config.Config
 
-case class MovieApiSource(config: Config, movieApiSourceBuilder: Option[MovieApiSourceBuilder] = None)
+import scala.concurrent.Future
+
+case class MovieApiSource(config: Config, movieApiSourceBuilder: Option[ApiSourceBuilder] = None)
   extends ApiSource[MovieDetailRecord](config, movieApiSourceBuilder) {
-  override def get: MovieDetailRecord = ???
+  override protected def getApiSourceConfig: ApiSourceConfig = {
+    movieApiSourceBuilder.getOrElse(MovieApiSourceBuilder()).build(config)
+  }
+
+  override def get: Future[MovieDetailRecord] = ???
 }
 
-case class MovieApiSourceBuilder(config: Config) extends ApiSourceBuilder {
+case class MovieApiSourceBuilder() extends ApiSourceBuilder {
   override def build(config: Config): ApiSourceConfig = {
     val namespace = "meezzle.api.tmdb"
     val url = config.getString(s"$namespace.url")

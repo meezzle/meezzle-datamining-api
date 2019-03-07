@@ -3,19 +3,19 @@ package com.meezzle.datamining.records
 case class BelongCollection(id: Int,
                             name: String,
                             poster_path: String,
-                            backdrop_path: String)
+                            backdrop_path: String) extends ApiRecord
 
 case class ProductionCompany(name: Option[String],
                              id: Option[Int],
                              logo_path: Option[String],
-                             origin_country: Option[String])
+                             origin_country: Option[String]) extends ApiRecord
 
 case class ProductionCountry(iso_3166_1: Option[String],
-                             name: Option[String])
+                             name: Option[String]) extends ApiRecord
 
-case class Genre(id: Option[Int],name: Option[String])
+case class Genre(id: Option[Int],name: Option[String]) extends ApiRecord
 
-case class SpokenLanguage(iso_639_1: Option[String], name: Option[String])
+case class SpokenLanguage(iso_639_1: Option[String], name: Option[String]) extends ApiRecord
 
 case class MovieDetailRecord(adult: Option[Boolean],
                              backdrop_path: Option[String],
