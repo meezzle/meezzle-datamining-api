@@ -27,7 +27,7 @@ object Client extends App {
 
   val url = s"${c.url}/${c.version.getOrElse(3)}/movie/13?api_key=${c.apiKey.getOrElse("")}"
 
-  val responseFuture: Future[HttpResponse] = Http().singleRequest(HttpRequest(uri = "http://akka.io"))
+  val responseFuture: Future[HttpResponse] = Http().singleRequest(HttpRequest(uri = url))
 
   responseFuture
     .onComplete {
