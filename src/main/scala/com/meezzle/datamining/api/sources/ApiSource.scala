@@ -23,7 +23,7 @@ abstract class ApiSource[T <: ApiRecord](config: Config,
   protected def getApiSourceConfig: ApiSourceConfig
   protected def getHttpVerb(verb: HttpMethod): HttpRequest = ???
 
-
+  def getUrl: String = ???
   def get(suffix: String): Future[T]
 
 }

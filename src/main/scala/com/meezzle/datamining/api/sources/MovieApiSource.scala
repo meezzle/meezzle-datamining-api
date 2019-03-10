@@ -15,6 +15,8 @@ case class MovieApiSource(config: Config, protected val movieApiSourceBuilder: O
   override def get(suffix: String): Future[MovieDetailRecord] = {
     ???
   }
+
+  override def getUrl: String = s"${sourceConfig.url}/${sourceConfig.version.getOrElse(3)}/movie/13?api_key=${sourceConfig.apiKey.getOrElse("")}"
 }
 
 case class MovieApiSourceBuilder() extends ApiSourceBuilder {

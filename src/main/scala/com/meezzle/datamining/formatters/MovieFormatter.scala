@@ -6,7 +6,7 @@ import com.meezzle.datamining.records._
 import spray.json.DefaultJsonProtocol._
 
 
-trait MovieFormatter {
+object MovieFormatter {
 
   implicit val belongCollectionFormatter = jsonFormat4(BelongCollection)
   implicit val productionCompanyFormatter = jsonFormat4(ProductionCompany)
