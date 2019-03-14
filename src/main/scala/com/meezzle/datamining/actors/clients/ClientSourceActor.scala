@@ -15,9 +15,5 @@ abstract class ClientSourceActor[T <: ApiRecord](apiSource: ApiSource[T]) extend
 
   final implicit val materializer = ActorMaterializer(ActorMaterializerSettings(context.system))
   protected val http = Http(context.system)
-  protected lazy val url = apiSource.getUrl
 
-  override def preStart(): Unit = {
-    http.singleRequest(HttpRequest(uri = url)).pipeTo(self)
-  }
 }

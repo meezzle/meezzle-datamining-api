@@ -41,7 +41,8 @@ object Client extends App {
     case _ => sys.error("http query is not available")
   }*/
 
-  system.actorOf(Props(MovieDetailClientActor(movieApiSource)), name = "movie-detail-record")
+  val movieAPi = system.actorOf(Props(MovieDetailClientActor(movieApiSource)), name = "movie-detail-record")
+
 
 
 }
