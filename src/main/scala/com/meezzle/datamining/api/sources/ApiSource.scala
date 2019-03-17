@@ -19,7 +19,7 @@ trait ApiSourceBuilder {
 abstract class ApiSource[T <: ApiRecord](config: Config,
                                          source: Option[ApiSourceBuilder]){
 
-  lazy val sourceConfig = getApiSourceConfig
-  protected def getApiSourceConfig: ApiSourceConfig
+  lazy val sourceConfig = getSourceConfig
+  protected def getSourceConfig: ApiSourceConfig
 
 }

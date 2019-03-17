@@ -9,7 +9,7 @@ import scala.concurrent.Future
 
 case class MovieApiSource(config: Config, protected val movieApiSourceBuilder: Option[ApiSourceBuilder] = None)
   extends ApiSource[MovieDetailRecord](config, movieApiSourceBuilder) {
-  override protected def getApiSourceConfig: ApiSourceConfig = {
+  override protected def getSourceConfig: ApiSourceConfig = {
     movieApiSourceBuilder.getOrElse(MovieApiSourceBuilder()).build(config)
   }
 
