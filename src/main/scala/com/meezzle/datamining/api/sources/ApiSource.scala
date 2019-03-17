@@ -1,8 +1,8 @@
 package com.meezzle.datamining.api.sources
 
 import akka.http.scaladsl.model._
-import com.meezzle.datamining.configs.ConfigBuilder
-import com.meezzle.datamining.records.ApiRecord
+import com.meezzle.datamining.api.configs.ConfigBuilder
+import com.meezzle.datamining.api.records.ApiRecord
 import com.typesafe.config.Config
 
 import scala.concurrent.Future

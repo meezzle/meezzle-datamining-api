@@ -14,6 +14,7 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-stream" % "2.5.19",
   "com.typesafe.akka" %% "akka-http-spray-json" % "10.1.7",
   "org.apache.spark" %% "spark-core" % "2.4.0",
-  "org.apache.spark" %% "spark-sql" % "2.4.0"
+  "org.apache.spark" %% "spark-sql" % "2.4.0",
+  "com.lightbend.akka" %% "akka-stream-alpakka-mongodb" % "1.0-M3"
   
 )

@@ -1,4 +1,4 @@
-package com.meezzle.datamining.records
+package com.meezzle.datamining.api.records
 
 case class BelongCollection(id: Int,
                             name: String,

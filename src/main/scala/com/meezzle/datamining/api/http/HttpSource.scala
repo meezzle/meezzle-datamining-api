@@ -1,4 +1,4 @@
-package com.meezzle.datamining.http
+package com.meezzle.datamining.api.http
 
 import com.meezzle.datamining.api.sources.{ApiSource, ApiSourceConfig}
 

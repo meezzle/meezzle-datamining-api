@@ -1,8 +1,8 @@
 package com.meezzle.datamining.api.sources
 
 import akka.http.scaladsl.model.HttpMethods
-import com.meezzle.datamining.configs.MovieConfigBuilder
-import com.meezzle.datamining.records.MovieDetailRecord
+import com.meezzle.datamining.api.configs.MovieConfigBuilder
+import com.meezzle.datamining.api.records.MovieDetailRecord
 import com.typesafe.config.Config
 
 import scala.concurrent.Future
@@ -13,7 +13,6 @@ case class MovieApiSource(config: Config, protected val movieApiSourceBuilder: O
     movieApiSourceBuilder.getOrElse(MovieApiSourceBuilder()).build(config)
   }
 
- // override def getUrl: String = s"${sourceConfig.url}/${sourceConfig.version.getOrElse(3)}/movie/13?api_key=${sourceConfig.apiKey.getOrElse("")}"
 }
 
 case class MovieApiSourceBuilder() extends ApiSourceBuilder {

@@ -1,8 +1,8 @@
-package com.meezzle.datamining.formatters
+package com.meezzle.datamining.api.formatters
 
 import akka.http.scaladsl.unmarshalling.Unmarshal
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
-import com.meezzle.datamining.records._
+import com.meezzle.datamining.api.records._
 import spray.json.DefaultJsonProtocol._
 
 

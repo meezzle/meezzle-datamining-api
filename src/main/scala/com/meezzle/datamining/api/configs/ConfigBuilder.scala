@@ -1,4 +1,4 @@
-package com.meezzle.datamining.configs
+package com.meezzle.datamining.api.configs
 
 import com.typesafe.config.Config
 

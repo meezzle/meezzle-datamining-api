@@ -1,18 +1,18 @@
-package com.meezzle.datamining.actors.clients
+package com.meezzle.datamining.api.actors.clients
 
 import akka.http.scaladsl.model.{HttpRequest, HttpResponse, StatusCodes}
 import akka.http.scaladsl.unmarshalling.Unmarshal
 import com.meezzle.datamining.api.sources.{MovieApiSource, MovieApiSourceBuilder}
-import com.meezzle.datamining.records.MovieDetailRecord
+import com.meezzle.datamining.api.records.MovieDetailRecord
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
-import com.meezzle.datamining.configs.MovieConfigBuilder
+import com.meezzle.datamining.api.configs.MovieConfigBuilder
 import akka.pattern.pipe
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
 case class MovieDetailClientActor(movieApiSource: MovieApiSource) extends ClientSourceActor(movieApiSource) {
 
-  import com.meezzle.datamining.formatters.MovieFormatter._
+  import com.meezzle.datamining.api.formatters.MovieFormatter._
   import MovieConfigBuilder._
 
   val movieBuilder =
@@ -31,6 +31,7 @@ case class MovieDetailClientActor(movieApiSource: MovieApiSource) extends Client
     val `to`: Int = movieBuilder.mapNumber.getOrElse[Int](To,20)
     println(from)
     (from to `to`).map { id =>
+      Thread.sleep(500)
       http.singleRequest(HttpRequest(uri = buildUrl(id))).pipeTo(self)
     }
   }
@@ -38,7 +39,10 @@ case class MovieDetailClientActor(movieApiSource: MovieApiSource) extends Client
   override def receive: Receive = {
     case response @ HttpResponse(StatusCodes.OK, _, entity,_) =>
       val obj = Unmarshal(response).to[MovieDetailRecord]
-      obj.map {println}
+      obj.map { mdr =>
+        println(mdr.original_title)
+        mdr.genres.map( genre => genre.map(println))
+      }
     case response @ HttpResponse(code, _, entity, _) => // do nothing
   }
 
