@@ -1,19 +1,20 @@
-package com.meezzle.datamining.api.actors.clients
+package com.meezzle.datamining.actors.clients.api
 
+import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 import akka.http.scaladsl.model.{HttpRequest, HttpResponse, StatusCodes}
 import akka.http.scaladsl.unmarshalling.Unmarshal
-import com.meezzle.datamining.api.sources.{MovieApiSource, MovieApiSourceBuilder}
-import com.meezzle.datamining.api.records.MovieDetailRecord
-import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
-import com.meezzle.datamining.api.configs.MovieConfigBuilder
 import akka.pattern.pipe
+import com.meezzle.datamining.actors.clients.ClientSourceActor
+import com.meezzle.datamining.api.configs.MovieConfigBuilder
+import com.meezzle.datamining.api.records.MovieDetailRecord
+import com.meezzle.datamining.api.sources.MovieApiSource
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
 case class MovieDetailClientActor(movieApiSource: MovieApiSource) extends ClientSourceActor(movieApiSource) {
 
-  import com.meezzle.datamining.api.formatters.MovieFormatter._
   import MovieConfigBuilder._
+  import com.meezzle.datamining.api.formatters.MovieFormatter._
 
   val movieBuilder =
     movieApiSource.sourceConfig.config.getOrElse(MovieConfigBuilder(movieApiSource.config))
@@ -29,7 +30,6 @@ case class MovieDetailClientActor(movieApiSource: MovieApiSource) extends Client
   def run = {
     val from: Int = movieBuilder.mapNumber.getOrElse[Int](From,1)
     val `to`: Int = movieBuilder.mapNumber.getOrElse[Int](To,20)
-    println(from)
     (from to `to`).map { id =>
       Thread.sleep(500)
       http.singleRequest(HttpRequest(uri = buildUrl(id))).pipeTo(self)

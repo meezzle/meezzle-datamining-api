@@ -1,4 +1,4 @@
-package com.meezzle.datamining.api.actors.clients
+package com.meezzle.datamining.actors.clients
 
 import akka.actor.{Actor, ActorLogging}
 import akka.http.scaladsl.Http
