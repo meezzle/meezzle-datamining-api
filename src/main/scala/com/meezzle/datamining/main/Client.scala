@@ -2,7 +2,7 @@ package com.meezzle.datamining.main
 
 import akka.actor.{ActorSystem, Props}
 import akka.stream.ActorMaterializer
-import com.meezzle.datamining.actors.clients.MovieDetailClientActor
+import com.meezzle.datamining.actors.clients.api.MovieDetailClientActor
 import com.meezzle.datamining.api.sources.MovieApiSource
 import com.typesafe.config.ConfigFactory
 
