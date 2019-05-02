@@ -18,7 +18,7 @@ case class OrientDBSourceBuilder() extends DBSourceBuilder {
   override def build(config: Config): DBSourceConfig = {
     val host = config.getString(s"$namespace.host")
     val port = config.getInt(s"$namespace.port")
-    val db = config.getString(s"$namespace.db")
+    val db = config.getString(s"$namespace.url")
     val user = config.getString(s"$namespace.username")
     val pwd = config.getString(s"$namespace.password")
 
