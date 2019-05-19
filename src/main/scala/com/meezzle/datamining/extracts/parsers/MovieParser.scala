@@ -1,6 +1,6 @@
 package com.meezzle.datamining.extracts.parsers
 
-import com.meezzle.datamining.extracts.{MovieExtractor, MovieLink, WikiMovie}
+import com.meezzle.datamining.extracts.{MovieExtractor, MovieLink, ParserRunnable, WikiMovie}
 import org.jsoup.Jsoup
 
 import scala.collection.JavaConverters._
@@ -11,7 +11,7 @@ object MovieLinkParser {
 
 }
 
-case class MovieLinkParser(movieExtractors: Seq[WikiMovie]) extends JsoupParser[Seq[MovieLink]] with Runnable {
+case class MovieLinkParser(movieExtractors: Seq[WikiMovie]) extends JsoupParser[Seq[MovieLink]] with ParserRunnable[MovieLink] {
   override protected def jsoupParser(url: String, query: String): Seq[MovieLink] = {
     Option(Jsoup.connect(url).get()).map { doc =>
       doc.select(query).asScala.flatMap { obj =>
@@ -32,9 +32,9 @@ case class MovieLinkParser(movieExtractors: Seq[WikiMovie]) extends JsoupParser[
     }.getOrElse(Seq.empty)
   }
 
-  override def run(): Unit = {
+  override def run: Seq[MovieLink] = {
     import MovieLinkParser._
-    val movies = movieExtractors.flatMap { wikiMovie =>
+    movieExtractors.flatMap { wikiMovie =>
       jsoupParser(wikiMovie.url, jsoupQuery)
     }
   }

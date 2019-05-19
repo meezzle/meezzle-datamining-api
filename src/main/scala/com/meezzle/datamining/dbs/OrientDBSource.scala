@@ -4,10 +4,10 @@ import com.meezzle.datamining.dbs.sources.{DBSource, DBSourceBuilder, DBSourceCo
 import com.typesafe.config.Config
 
 case class OrientDBSource(config: Config,
-                          sourceBuilder: Option[OrientDBSourceBuilder] = None)
-extends DBSource(config, sourceBuilder){
+                          protected val optSourceBuilder: Option[OrientDBSourceBuilder] = None)
+extends DBSource(config, optSourceBuilder){
   override protected def getSourceConfig: DBSourceConfig = {
-    sourceBuilder.getOrElse(OrientDBSourceBuilder()).build(config)
+    optSourceBuilder.getOrElse(OrientDBSourceBuilder()).build(config)
   }
 }
 

@@ -4,7 +4,7 @@ import com.meezzle.datamining.dbs.sources.{DBSource, DBSourceBuilder, DBSourceCo
 import com.typesafe.config.Config
 
 case class PostgresDBSource(config: Config,
-                            optSourceBuilder: Option[PostgresDBSourceBuilder] = None)
+                            protected val optSourceBuilder: Option[PostgresDBSourceBuilder] = None)
   extends DBSource(config, optSourceBuilder) {
   override protected def getSourceConfig: DBSourceConfig = {
     optSourceBuilder.getOrElse(PostgresDBSourceBuilder()).build(config)

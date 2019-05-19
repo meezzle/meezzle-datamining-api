@@ -4,10 +4,10 @@ import com.meezzle.datamining.dbs.sources.{DBSource, DBSourceBuilder, DBSourceCo
 import com.typesafe.config.Config
 
 case class MongoDBSource(config: Config,
-                    sourceBuilder: Option[MongoDBSourceBuilder] = None)
-extends DBSource(config, sourceBuilder) {
+                         optSourceBuilder: Option[MongoDBSourceBuilder] = None)
+extends DBSource(config, optSourceBuilder) {
   override protected def getSourceConfig: DBSourceConfig = {
-    sourceBuilder.getOrElse(MongoDBSourceBuilder()).build(config)
+    optSourceBuilder.getOrElse(MongoDBSourceBuilder()).build(config)
   }
 }
 
