@@ -1,5 +1,6 @@
-package com.meezzle.datamining.dbs.sources
+package com.meezzle.datamining.dbs
 
+import com.meezzle.datamining.dbs.sources.{DBSource, DBSourceBuilder, DBSourceConfig}
 import com.typesafe.config.Config
 
 case class PostgresDBSource(config: Config,
