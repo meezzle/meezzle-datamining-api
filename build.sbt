@@ -19,6 +19,8 @@ libraryDependencies ++= Seq(
   "com.lightbend.akka" %% "akka-stream-alpakka-orientdb" % "1.0-RC1",
   "org.jsoup" % "jsoup" % "1.11.3",
   "com.fasterxml.jackson.dataformat" % "jackson-dataformat-yaml" % "2.9.8",
-  "org.postgresql" % "postgresql" % "42.2.5"
+  "com.typesafe.slick" %% "slick" % "3.3.0",
+  "org.slf4j" % "slf4j-nop" % "1.6.4",
+  "com.typesafe.slick" %% "slick-hikaricp" % "3.3.0"
 
 )
