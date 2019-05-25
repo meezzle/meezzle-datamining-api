@@ -11,10 +11,10 @@ object InputExtractor {
     mapper.readValue(inputStream, classOf[Array[T]]).toSeq
   }
 
-  def getMovies(filename: String): Seq[WikiMovie] = {
+  def getMovies(filename: String): Seq[JsonWikiMovieUrl] = {
     val mapper = new ObjectMapper(new YAMLFactory())
     val inputStream = getClass.getClassLoader.getResource(filename)
-    mapper.readValue(inputStream, classOf[Array[WikiMovie]]).toSeq
+    mapper.readValue(inputStream, classOf[Array[JsonWikiMovieUrl]]).toSeq
   }
 
 }
