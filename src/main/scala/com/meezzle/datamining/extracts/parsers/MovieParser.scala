@@ -2,17 +2,18 @@ package com.meezzle.datamining.extracts.parsers
 
 import com.meezzle.datamining.extracts._
 import org.jsoup.Jsoup
+import org.jsoup.nodes.Element
 
 import scala.collection.JavaConverters._
 
-object MovieLinkParser {
+object WikiMovieLinkParser {
 
   val jsoupQuery = "div[class=div-col columns column-width]"
 
 }
 
-case class MovieLinkParser(movieExtractors: Seq[JsonWikiMovieUrl])
-  extends JsoupParser[Seq[WikiMovieLink]] with ParserRunnable[WikiMovieLink] {
+case class WikiMovieLinkParser(movieExtractors: Seq[JsonWikiMovieUrl])
+  extends JsoupParser[WikiMovieLink] with ParserRunnable[WikiMovieLink] {
   override protected def jsoupParser(url: String, query: String): Seq[WikiMovieLink] = {
     Option(Jsoup.connect(url).get()).map { doc =>
       doc.select(query).asScala.flatMap { obj =>
@@ -34,9 +35,42 @@ case class MovieLinkParser(movieExtractors: Seq[JsonWikiMovieUrl])
   }
 
   override def run: Seq[WikiMovieLink] = {
-    import MovieLinkParser._
+    import WikiMovieLinkParser._
     movieExtractors.flatMap { wikiMovie =>
       jsoupParser(wikiMovie.url, jsoupQuery)
     }
+  }
+}
+
+object WikiMovieDataParser {
+
+  val jsoupQuery = "table[class=infobox vevent]"
+
+}
+
+case class WikiMovieDataParser(wikiMovieLink: WikiMovieLink)
+  extends JsoupParser[WikiMovieData] with ParserRunnable[WikiMovieData] {
+  override protected def jsoupParser(url: String, query: String): Seq[WikiMovieData] = {
+    Option(Jsoup.connect(url).get()).map { doc =>
+      doc.select(query).asScala.map { obj =>
+        obj.getElementsByTag("tr").asScala.map { el =>
+          println(el)
+        }
+      }
+    }
+    Seq.empty
+  }
+
+  protected def jsoupParser(el: Element) = {
+    println(el.child(0))
+    println(el.child(1))
+    println(el.child(2))
+    println(el.child(3))
+  }
+
+
+  override def run: Seq[WikiMovieData] = {
+    import WikiMovieDataParser._
+    jsoupParser(wikiMovieLink.url, jsoupQuery)
   }
 }
