@@ -53,19 +53,15 @@ case class WikiMovieDataParser(wikiMovieLink: WikiMovieLink)
   override protected def jsoupParser(url: String, query: String): Seq[WikiMovieData] = {
     Option(Jsoup.connect(url).get()).map { doc =>
       doc.select(query).asScala.map { obj =>
-        obj.getElementsByTag("tr").asScala.map { el =>
-          println(el)
-        }
+          jsoupParser(obj)
       }
     }
     Seq.empty
   }
 
   protected def jsoupParser(el: Element) = {
-    println(el.child(0))
-    println(el.child(1))
-    println(el.child(2))
-    println(el.child(3))
+    val td = el.getElementsByTag("td").asScala
+
   }
 
 
