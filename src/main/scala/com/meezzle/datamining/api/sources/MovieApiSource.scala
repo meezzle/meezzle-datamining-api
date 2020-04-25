@@ -26,5 +26,5 @@ case class MovieApiSourceBuilder() extends ApiSourceBuilder {
 }
 
 object MovieApiSourceBuilder {
-  val namespace = "meezzle.api.tmdb"
+  val namespace = "meezzle.datamining.apis.tmdb"
 }
